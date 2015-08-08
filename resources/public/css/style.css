@@ -12,6 +12,30 @@
     color: #dddddd;
 }
 
+.cell.unit-0 {
+    color: #ddda5c;
+}
+
+.cell.unit-1 {
+    color: #dd5b5d;
+}
+
+.cell.unit-2 {
+    color: #dd59d7;
+}
+
+.cell.unit-3 {
+    color: #5b59dd;
+}
+
+.cell.unit-4 {
+    color: #72ddda;
+}
+
+.cell.unit-5 {
+    color: #5bdd68;
+}
+
 .cell .hex {
     font-size: 70px;
     line-height: 1;

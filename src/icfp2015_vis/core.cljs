@@ -12,7 +12,8 @@
 (defn create-board [width height & filled]
   {:width width
    :height height
-   :filled filled})
+   :filled filled
+   :units []})
 
 (defonce app-state
   (atom {:board (create-board 10 10)}))
@@ -35,14 +36,21 @@
     (d/span {:class "text"} (str x ", " y))))
 
 (defn cell-style [board cell]
-  (if (some #{cell} (into (:filled board) (:members (:unit board))))
-    :full :empty))
+  (cond
+    (some #{cell} (:filled board)) :full
+    (some #{cell} (:members (nth (:units board) 0 nil))) :unit-0
+    (some #{cell} (:members (nth (:units board) 1 nil))) :unit-1
+    (some #{cell} (:members (nth (:units board) 2 nil))) :unit-2
+    (some #{cell} (:members (nth (:units board) 3 nil))) :unit-3
+    (some #{cell} (:members (nth (:units board) 4 nil))) :unit-4
+    (some #{cell} (:members (nth (:units board) 5 nil))) :unit-5
+    :else :empty))
 
 (defn row [board y]
   (apply d/div {:class "row"}
     (for [x (range (:width board))
           :let [cell [x y]
-                pivot? (= cell (:pivot (:unit board)))]]
+                pivot? (some #{cell} (map :pivot (:units board)))]]
       (render-cell cell (cell-style board cell) pivot?))))
 
 (defn pixel-board-width [board]
