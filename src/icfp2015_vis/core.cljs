@@ -28,18 +28,22 @@
             (recur)))
         (println "Error:" (pr-str error))))))
 
-(defn hex [x y state]
-  (d/div {:class (str "hex " (name state))}
-    (d/span {:class "shape"} \u2B22)
+(defn render-cell [[x y] style pivot?]
+  (d/div {:class (str "cell " (name style))}
+    (d/span {:class "hex"} \u2B22)
+    (when pivot? (d/span {:class "pivot"} \u2022))
     (d/span {:class "text"} (str x ", " y))))
 
-(defn filled? [board x y]
-  (if (some #{[x y]} (:filled board)) :full :empty))
+(defn cell-style [board cell]
+  (if (some #{cell} (into (:filled board) (:members (:unit board))))
+    :full :empty))
 
 (defn row [board y]
   (apply d/div {:class "row"}
-    (for [x (range (:width board))]
-      (hex x y (filled? board x y)))))
+    (for [x (range (:width board))
+          :let [cell [x y]
+                pivot? (= cell (:pivot (:unit board)))]]
+      (render-cell cell (cell-style board cell) pivot?))))
 
 (defn pixel-board-width [board]
   (+ 35 (* 60 (:width board))))
