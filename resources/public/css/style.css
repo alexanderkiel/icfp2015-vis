@@ -1,0 +1,40 @@
+.hex {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+}
+
+.hex.full {
+    color: rgb(255, 145, 0);
+}
+
+.hex.empty {
+    color: #BBB;
+}
+
+.hex .shape {
+    font-size: 70px;
+    line-height: 1;
+}
+
+.hex .text {
+    position: absolute;
+    top: 4px;
+    width: 60px;
+    font-size: 18px;
+    line-height: 70px;
+    text-align: center;
+    color: #333;
+}
+
+.row {
+    margin-bottom: -17px;
+}
+
+.row:nth-child(even) {
+    margin-left: 30px;
+}
+
+.board {
+    margin: 0 auto;
+}
