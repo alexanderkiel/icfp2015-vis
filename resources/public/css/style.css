@@ -8,6 +8,10 @@
     color: rgb(255, 166, 52);
 }
 
+.cell.marked {
+    color: rgb(96, 255, 67);
+}
+
 .cell.empty {
     color: #dddddd;
 }

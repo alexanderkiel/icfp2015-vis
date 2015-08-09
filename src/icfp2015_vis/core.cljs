@@ -38,6 +38,7 @@
 (defn cell-style [board cell]
   (cond
     (some #{cell} (:filled board)) :full
+    (some #{cell} (:marked board)) :marked
     (some #{cell} (:members (nth (:units board) 0 nil))) :unit-0
     (some #{cell} (:members (nth (:units board) 1 nil))) :unit-1
     (some #{cell} (:members (nth (:units board) 2 nil))) :unit-2
